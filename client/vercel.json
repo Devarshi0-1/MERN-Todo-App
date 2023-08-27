@@ -2,7 +2,7 @@
 	"rewrites": [{ "source": "/(.*)", "destination": "/" }],
 	"headers": [
 		{
-			"source": "https://mern-todo-backend-chm2.onrender.com/api/v1/(.*)",
+			"source": "/api/(.*)",
 			"headers": [
 				{ "key": "Access-Control-Allow-Credentials", "value": "true" },
 				{
