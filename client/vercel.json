@@ -1,10 +1,14 @@
 {
+	"rewrites": [{ "source": "/(.*)", "destination": "/" }],
 	"headers": [
 		{
 			"source": "https://mern-todo-backend-chm2.onrender.com/api/v1/(.*)",
 			"headers": [
 				{ "key": "Access-Control-Allow-Credentials", "value": "true" },
-				{ "key": "Access-Control-Allow-Origin", "value": "https://mern-todo-backend-chm2.onrender.com/api/v1/*" },
+				{
+					"key": "Access-Control-Allow-Origin",
+					"value": "https://mern-todo-backend-chm2.onrender.com/api/v1/*"
+				},
 				{
 					"key": "Access-Control-Allow-Methods",
 					"value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
