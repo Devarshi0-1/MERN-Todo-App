@@ -5,7 +5,7 @@ import { createContext } from 'react';
 import './styles/app.scss';
 import { useState } from 'react';
 
-export const server = 'https://node-todo-backend-35rh.onrender.com/api/v1';
+export const server = 'https://mern-todo-backend-chm2.onrender.com/api/v1';
 
 export const Context = createContext({ isAuthenticated: false });
 
