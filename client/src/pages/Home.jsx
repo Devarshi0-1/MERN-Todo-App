@@ -34,6 +34,9 @@ const Home = () => {
 	};
 
 	const handleDelete = async (id) => {
+		setTasks((prev) => {
+			return tasks.filter((task) => task._id !== id);
+		});
 		try {
 			const { data } = await axios.delete(`${server}/task/${id}`, {
 				withCredentials: true,
