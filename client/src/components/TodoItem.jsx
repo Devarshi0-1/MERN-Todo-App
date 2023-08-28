@@ -3,11 +3,14 @@ const TodoItem = ({
 	title,
 	desc,
 	isCompleted,
+	loading,
 	handleUpdate,
 	handleDelete,
 }) => {
 	return (
-		<div className='todo'>
+		<div
+			className='todo'
+			style={{ opacity: loading ? 0.5 : null }}>
 			<div>
 				<h4>{title}</h4>
 				<p>{desc}</p>

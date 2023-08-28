@@ -15,6 +15,7 @@ const Home = () => {
 	const { isAuthenticated } = useContext(Context);
 
 	const handleUpdate = async (id) => {
+		const todos = tasks;
 		setTasks((prev) => {
 			return prev.map((task) =>
 				task._id === id ? { ...task, isCompleted: !task.isCompleted } : task
@@ -29,13 +30,15 @@ const Home = () => {
 			toast.success(data.message);
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
+			setTasks(todos);
 			toast.error(error.response.data.message);
 		}
 	};
 
 	const handleDelete = async (id) => {
+		const todos = tasks;
 		setTasks((prev) => {
-			return tasks.filter((task) => task._id !== id);
+			return prev.filter((task) => task._id !== id);
 		});
 		try {
 			const { data } = await axios.delete(`${server}/task/${id}`, {
@@ -44,11 +47,13 @@ const Home = () => {
 			toast.success(data.message);
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
+			setTasks(todos);
 			toast.error(error.response.data.message);
 		}
 	};
 
 	const handleSubmit = async (e) => {
+		const todos = tasks;
 		e.preventDefault();
 		setLoading(true);
 		setTasks((prev) => [
@@ -83,6 +88,7 @@ const Home = () => {
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
 			toast.error(error.response.data.message);
+			setTasks(todos);
 			setLoading(false);
 		}
 	};
@@ -142,6 +148,7 @@ const Home = () => {
 						title={task.title}
 						desc={task.description}
 						isCompleted={task.isCompleted}
+						loading={loading}
 						handleUpdate={handleUpdate}
 						handleDelete={handleDelete}
 					/>
