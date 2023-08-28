@@ -31,7 +31,6 @@ const Home = () => {
 			toast.success(data.message);
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
-			if (JSON.stringify(tasks) !== JSON.stringify(todos)) setTasks(todos);
 			setTasks(todos);
 			toast.error(error.response.data.message);
 		}
@@ -49,7 +48,7 @@ const Home = () => {
 			toast.success(data.message);
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
-			if (JSON.stringify(tasks) !== JSON.stringify(todos)) setTasks(todos);
+			setTasks(todos);
 			toast.error(error.response.data.message);
 		}
 	};
@@ -89,7 +88,6 @@ const Home = () => {
 			setDescription('');
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
-			if (JSON.stringify(tasks) !== JSON.stringify(todos)) setTasks(todos);
 			toast.error(error.response.data.message);
 			setTasks(todos);
 			setLoading(false);
