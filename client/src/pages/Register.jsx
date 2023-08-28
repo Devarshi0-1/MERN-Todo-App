@@ -35,9 +35,9 @@ const Register = () => {
 			setIsAuthenticated(true);
 			setLoading(false);
 		} catch (error) {
-            toast.error(error.response.data.message);
+			toast.error(error.response.data.message);
 			setIsAuthenticated(false);
-            setLoading(false);
+			setLoading(false);
 		}
 	};
 
@@ -52,6 +52,8 @@ const Register = () => {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 						placeholder='Name'
+						name='name'
+						id='name'
 						autoComplete='on'
 						required
 					/>
@@ -60,6 +62,8 @@ const Register = () => {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						placeholder='Email'
+						name='email'
+						id='email'
 						autoComplete='on'
 						required
 					/>
@@ -68,10 +72,16 @@ const Register = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder='Password'
+						name='password'
+						id='password'
 						autoComplete='on'
 						required
 					/>
-					<button type='submit' disabled={loading}>Sign Up</button>
+					<button
+						type='submit'
+						disabled={loading}>
+						Sign Up
+					</button>
 					<h4>Or</h4>
 					<Link to='/login'>Login Up</Link>
 				</form>

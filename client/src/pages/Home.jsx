@@ -91,6 +91,8 @@ const Home = () => {
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
 							placeholder='Title'
+							name='title'
+							id='title'
 							autoComplete='on'
 							required
 						/>
@@ -99,6 +101,8 @@ const Home = () => {
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 							placeholder='Description'
+							name='description'
+							id='description'
 							autoComplete='on'
 							required
 						/>
