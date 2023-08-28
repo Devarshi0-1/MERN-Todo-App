@@ -17,10 +17,13 @@ const Home = () => {
 	const handleUpdate = async (id) => {
 		console.log(tasks);
 		console.log('Task Original', tasks[0]);
-		console.log('Task Mutated', { ...tasks[0], isCompleted: !isCompleted });
+		console.log('Task Mutated', {
+			...tasks[0],
+			isCompleted: !tasks[0].isCompleted,
+		});
 		// setTasks((prev) => {
 		// 	return prev.map((task) =>
-		// 		task._id === id ? { ...task, isCompleted: !isCompleted } : task
+		// 		task._id === id ? { ...task, isCompleted: !task.isCompleted } : task
 		// 	);
 		// });
 		try {
