@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Context, server } from '../main';
 import { toast } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import TodoItem from '../components/TodoItem';
 
 const Home = () => {
@@ -104,6 +105,8 @@ const Home = () => {
 			});
 	}, [refresh]);
 
+	const [listRef] = useAutoAnimate();
+
 	if (!isAuthenticated) return <Navigate to='/login' />;
 
 	return (
@@ -140,7 +143,9 @@ const Home = () => {
 					</form>
 				</section>
 			</div>
-			<section className='todosContainer'>
+			<section
+				className='todosContainer'
+				ref={listRef}>
 				{tasks?.map((task) => (
 					<TodoItem
 						key={task._id}
