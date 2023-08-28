@@ -16,8 +16,8 @@ const Home = () => {
 
 	const handleUpdate = async (id) => {
 		console.log(tasks);
-		console.log(tasks[0]);
-		console.log({ ...tasks[0] });
+		console.log('Task Original', tasks[0]);
+		console.log('Task Mutated', { ...tasks[0], isCompleted: !isCompleted });
 		// setTasks((prev) => {
 		// 	return prev.map((task) =>
 		// 		task._id === id ? { ...task, isCompleted: !isCompleted } : task
