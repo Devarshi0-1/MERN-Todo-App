@@ -16,7 +16,7 @@ const Home = () => {
 
 	const handleUpdate = async (id) => {
 		setTasks((prev) => {
-			prev.map((task) =>
+			return prev.map((task) =>
 				task._id === id ? { ...task, isCompleted: true } : task
 			);
 		});
