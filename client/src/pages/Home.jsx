@@ -15,15 +15,10 @@ const Home = () => {
 	const { isAuthenticated } = useContext(Context);
 
 	const handleUpdate = async (id) => {
-		// const updateItem = tasks.filter((task) => {
-		// 	return task._id === id;
-		// })[0];
-		// updateItem.isCompleted = !updateItem.isCompleted;
-		// setTasks((prev) => [...prev, updateItem]);
 		setTasks((prev) => {
-			prev.map((task) => {
-				task._id === id ? { ...task, isCompleted: !isCompleted } : task;
-			});
+			prev.map((task) =>
+				task._id === id ? { ...task, isCompleted: true } : task
+			);
 		});
 		try {
 			const { data } = await axios.put(
