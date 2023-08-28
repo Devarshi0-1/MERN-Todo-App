@@ -43,6 +43,17 @@ const Home = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
+		setTasks((prev) => [
+			...prev,
+			{
+				_id: prev.length + 1,
+				title,
+				description,
+				isCompleted: false,
+				handleUpdate: () => {},
+				handleDelete: () => {},
+			},
+		]);
 		try {
 			const { data } = await axios.post(
 				`${server}/task/new`,
