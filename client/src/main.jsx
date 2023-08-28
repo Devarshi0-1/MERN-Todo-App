@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export const Context = createContext({ isAuthenticated: false });
 
-export const server = 'https://mern-todo-backend-chm2.onrender.com/api/v1';
+export const server = 'https://mern-todo-backend-vercel.vercel.app/api/v1';
 
 const AppWrapper = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
