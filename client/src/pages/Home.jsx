@@ -15,7 +15,6 @@ const Home = () => {
 	const { isAuthenticated } = useContext(Context);
 
 	const handleUpdate = async (id) => {
-		const isCompleted = false;
 		setTasks((prev) => {
 			return prev.map((task) =>
 				task._id === id ? { ...task, isCompleted: !isCompleted } : task
