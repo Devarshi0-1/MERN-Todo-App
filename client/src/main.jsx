@@ -9,7 +9,7 @@ export const Context = createContext({ isAuthenticated: false });
 
 export const server =
 	import.meta.env.VITE_ENV_MODE === 'Development'
-		? 'http://localhost:5000'
+		? 'http://localhost:5000/api/v1'
 		: 'https://mern-todo-backend-vercel.vercel.app/api/v1';
 
 const AppWrapper = () => {
