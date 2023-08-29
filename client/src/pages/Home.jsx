@@ -28,7 +28,8 @@ const Home = () => {
 				{},
 				{ withCredentials: true }
 			);
-			toast.success(data.message);
+            toast.success(data.message);
+            
 			setRefresh((prevVal) => !prevVal);
 		} catch (error) {
 			setTasks(todos);
