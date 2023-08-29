@@ -12,9 +12,6 @@ export const server =
 		? 'http://localhost:5000'
 		: 'https://mern-todo-backend-vercel.vercel.app/api/v1';
 
-console.log('VITE_ENV_MODE', import.meta.env.VITE_ENV_MODE);
-console.log(import.meta.env.VITE_ENV_MODE === 'Development');
-
 const AppWrapper = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [loading, setLoading] = useState(false);
