@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const Register = () => {
 	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
 	const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
@@ -20,7 +20,7 @@ const Register = () => {
 				`${server}/users/new`,
 				{
 					name,
-					email,
+					username,
 					password,
 				},
 				{
@@ -58,12 +58,12 @@ const Register = () => {
 						required
 					/>
 					<input
-						type='email'
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						placeholder='Email'
-						name='email'
-						id='email'
+						type='text'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						placeholder='Username'
+						name='username'
+						id='username'
 						autoComplete='on'
 						required
 					/>

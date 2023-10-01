@@ -1,0 +1,145 @@
+.dashboard {
+	padding: 50px;
+	width: 100%;
+}
+
+.dashboard .usersInfoCont {
+	margin-top: 30px;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.dashboard .usersInfoCont > :first-child {
+	background-color: rgb(214, 214, 214);
+	padding: 10px;
+	padding-right: 50px;
+}
+
+.dashboard .tableRowWrapper {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.1fr;
+	background-color: white;
+	place-items: center;
+	padding-right: 50px;
+}
+
+.dashboard .usersInfoCont .usersInfo-header-text {
+	font-size: 1.5rem;
+	text-align: center;
+	font-weight: 600;
+}
+
+.dashboard .user-about {
+	text-align: left;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+}
+
+.dashboard .user-image-wrapper img {
+	margin: 5px 10px;
+	width: 50px;
+	display: block;
+}
+
+.dashboard .user-details > :first-child {
+	font-size: 1.5rem;
+}
+
+.dashboard .user-details > :nth-child(2) {
+	font-size: 0.9rem;
+	opacity: 0.6;
+}
+
+.dashboard .noOfTasks,
+.dashboard .role,
+.dashboard .createdAt {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+}
+
+.dashboard .role p {
+	padding: 5px 10px;
+	border-radius: 25px;
+}
+
+.dashboard .role .visitor {
+	background-color: #dcf7eb;
+	color: #5aaf93;
+	border: 1px solid #5aaf93;
+}
+
+.dashboard .role .admin {
+	background-color: #fee8e8;
+	color: #e95e5e;
+	border: 1px solid #e95e5e;
+}
+
+.dashboard .mutations {
+	font-size: 2rem;
+}
+
+.dashboard .mutations .admin {
+	color: #e95e5e;
+	opacity: 0.6;
+}
+
+.dashboard .mutations .visitor {
+	color: #e95e5e;
+}
+
+.dashboard .tableRowWrapper .expand {
+	font-size: 2.5rem;
+	cursor: pointer;
+	transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+}
+
+.dashboard .tableRowWrapper .expand.show {
+	opacity: 1;
+}
+
+.dashboard .tableRowWrapper .expand.hide {
+	opacity: 0;
+	user-select: none;
+}
+
+.dashboard .adminTodoWrapper {
+	background-color: #5aaf93;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	place-items: center;
+	font-size: 1.5rem;
+}
+
+.dashboard .adminTodoRowWrapper .adminTodo {
+	min-height: 50px;
+	background-color: #e95e5e;
+	outline: 1px solid black;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	font-size: 1.2rem;
+	place-items: center;
+}
+
+.dashboard .adminTodoRowWrapper .todoMutations {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dashboard .adminTodoRowWrapper input[type='checkbox'] {
+	width: 30px;
+	aspect-ratio: 1;
+	margin: 2px;
+}
+
+.dashboard .adminTodoRowWrapper .btn {
+	height: fit-content;
+	font-size: 0.8rem;
+	width: fit-content;
+	border: 1px solid white;
+	margin: 2px;
+}

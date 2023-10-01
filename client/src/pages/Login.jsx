@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
 const Login = () => {
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
 	const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
@@ -18,7 +18,7 @@ const Login = () => {
 			const { data } = await axios.post(
 				`${server}/users/login`,
 				{
-					email,
+					username,
 					password,
 				},
 				{
@@ -46,12 +46,12 @@ const Login = () => {
 			<section>
 				<form onSubmit={handleSubmit}>
 					<input
-						type='email'
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						placeholder='Email'
-						name='email'
-						id='email'
+						type='text'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						placeholder='Username'
+						name='username'
+						id='username'
 						autoComplete='on'
 						required
 					/>

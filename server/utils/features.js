@@ -16,3 +16,10 @@ export const sendCookie = (user, res, message, statusCode = 200) => {
 			message,
 		});
 };
+
+export const isEmpty = (...strings) => {
+	strings.forEach((str) => {
+		if (str === null || str === undefined || str.length <= 0) return true;
+	});
+	return false;
+};

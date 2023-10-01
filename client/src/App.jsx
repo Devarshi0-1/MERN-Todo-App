@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { Context, server } from './main';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
 	const { setUser, setIsAuthenticated, setLoading } = useContext(Context);
@@ -49,6 +50,10 @@ const App = () => {
 				<Route
 					path='/register'
 					element={<Register />}
+				/>
+				<Route
+					path='/dashboard'
+					element={<Dashboard />}
 				/>
 			</Routes>
 			<Toaster />

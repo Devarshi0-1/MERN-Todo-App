@@ -5,24 +5,30 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 const Header = () => {
-	const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
-		useContext(Context);
+	const {
+		user,
+		setUser,
+		isAuthenticated,
+		setIsAuthenticated,
+		loading,
+		setLoading,
+	} = useContext(Context);
 
-    const handleLogout = async () => {
-        setLoading(true)
+	const handleLogout = async () => {
+		setLoading(true);
 		try {
-            await axios.get(`${server}/users/logout`, {
-                withCredentials: true,
+			await axios.get(`${server}/users/logout`, {
+				withCredentials: true,
 			});
-            
+
 			toast.success('Logged Out Successfully');
 			setIsAuthenticated(false);
-            setLoading(false)
+			setLoading(false);
+			setUser({});
 		} catch (error) {
-            toast.error(error.response.data.message);
+			toast.error(error.response.data.message);
 			setIsAuthenticated(true);
-			console.log(error);
-            setLoading(false)
+			setLoading(false);
 		}
 	};
 
@@ -37,14 +43,14 @@ const Header = () => {
 				{isAuthenticated ? (
 					<button
 						className='btn'
-                        onClick={handleLogout}
-                        disabled={loading}
-                    >
+						onClick={handleLogout}
+						disabled={loading}>
 						Logout
 					</button>
 				) : (
 					<Link to='/login'>Login</Link>
 				)}
+				{user?.role === 'admin' && <Link to='/dashboard'>Dashboard</Link>}
 			</article>
 		</nav>
 	);

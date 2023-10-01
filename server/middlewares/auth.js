@@ -16,3 +16,12 @@ export const isAuthenticated = async (req, res, next) => {
 
 	next();
 };
+
+export const isAdmin = (req, res, next) => {
+	if (req.user.role === 'admin') next();
+	else
+		return res.status(401).json({
+			success: false,
+			message: 'Access Denied',
+		});
+};

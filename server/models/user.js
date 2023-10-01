@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	email: {
+	username: {
 		type: String,
 		unique: true,
 		required: true,
@@ -14,6 +14,10 @@ const schema = new mongoose.Schema({
 		type: String,
 		select: false,
 		required: true,
+	},
+	role: {
+		type: String,
+		default: 'visitor',
 	},
 	createdAt: {
 		type: Date,
