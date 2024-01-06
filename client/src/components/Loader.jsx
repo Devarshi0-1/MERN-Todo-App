@@ -1,4 +1,4 @@
 const Loader = () => {
-	return <div className='loader'>Loader</div>;
-};
-export default Loader;
+    return <div className='loader'>Loading</div>
+}
+export default Loader

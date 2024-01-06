@@ -1,92 +1,99 @@
-import { useState, useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import { Context, server } from '../main';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import { useState } from 'react'
+import axios from 'axios'
+import { Link, Navigate } from 'react-router-dom'
+import { server } from '../main'
+import toast from 'react-hot-toast'
+import { useStore } from '../utils/store'
 
 const Register = () => {
-	const [name, setName] = useState('');
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
+    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-	const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
-		useContext(Context);
+    const { isAuthenticated, setIsAuthenticated, loading, setLoading } = useStore()
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		setLoading(true);
-		try {
-			const { data } = await axios.post(
-				`${server}/users/new`,
-				{
-					name,
-					username,
-					password,
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					withCredentials: true,
-				}
-			);
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        try {
+            const { data } = await axios.post(
+                `${server}/users/new`,
+                {
+                    name,
+                    username,
+                    password,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true,
+                },
+            )
 
-			toast.success(data.message);
-			setIsAuthenticated(true);
-			setLoading(false);
-		} catch (error) {
-			toast.error(error.response.data.message);
-			setIsAuthenticated(false);
-			setLoading(false);
-		}
-	};
+            toast.success(data.message)
+            setIsAuthenticated(true)
+            setLoading(false)
+        } catch (error) {
+            toast.error(error.response.data.message)
+            setIsAuthenticated(false)
+            setLoading(false)
+        }
+    }
 
-	if (isAuthenticated) return <Navigate to='/' />;
+    if (isAuthenticated) return <Navigate to='/' />
 
-	return (
-		<div className='login'>
-			<section>
-				<form onSubmit={handleSubmit}>
-					<input
-						type='text'
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						placeholder='Name'
-						name='name'
-						id='name'
-						autoComplete='on'
-						required
-					/>
-					<input
-						type='text'
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						placeholder='Username'
-						name='username'
-						id='username'
-						autoComplete='on'
-						required
-					/>
-					<input
-						type='password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						placeholder='Password'
-						name='password'
-						id='password'
-						autoComplete='on'
-						required
-					/>
-					<button
-						type='submit'
-						disabled={loading}>
-						Sign Up
-					</button>
-					<h4>Or</h4>
-					<Link to='/login'>Login Up</Link>
-				</form>
-			</section>
-		</div>
-	);
-};
-export default Register;
+    return (
+        <div className='m-auto mt-24 w-2/4 rounded-3xl bg-gradient-to-br from-[rgb(255,255,255,0.2)] to-transparent p-6'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-6 bg-transparent'>
+                <input
+                    type='text'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder='Name'
+                    name='name'
+                    id='name'
+                    autoComplete='on'
+                    required
+                    className='rounded-3xl border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
+                />
+                <input
+                    type='text'
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder='Username'
+                    name='username'
+                    id='username'
+                    autoComplete='on'
+                    required
+                    className='rounded-3xl border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
+                />
+                <input
+                    type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder='Password'
+                    name='password'
+                    id='password'
+                    autoComplete='on'
+                    required
+                    className='rounded-3xl border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
+                />
+                <div className='flex items-center justify-between px-4'>
+                    <Link
+                        to='/login'
+                        className='text-center text-white transition-opacity hover:opacity-70'>
+                        Already having an account?
+                    </Link>
+                    <button
+                        type='submit'
+                        disabled={loading}
+                        className='w-fit rounded-xl border-[1px] bg-transparent bg-white px-3 py-2 text-xl text-black transition-opacity hover:opacity-70'>
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+        </div>
+    )
+}
+export default Register
