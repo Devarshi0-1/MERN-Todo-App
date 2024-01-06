@@ -52,22 +52,6 @@ export const getUserTasks = async (req, res, next) => {
 	}
 };
 
-export const getAllData = async (req, res, next) => {
-	try {
-		const allUsers = await User.find({});
-		const tasks = await Task.find({});
-
-		return res.status(200).json({
-			success: true,
-			message: 'All Users Fetched',
-			users: allUsers,
-			tasks,
-		});
-	} catch (error) {
-		next(error);
-	}
-};
-
 export const getAllTasks = async (req, res, next) => {
 	try {
 		const { id } = req.params;

@@ -27,7 +27,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/task', taskRouter);
 app.use('/api/v1/admin', adminRouter);
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
 	res.send('Nice working');
 });
 

@@ -13,8 +13,6 @@ router.delete('/delete/:id', isAuthenticated, isAdmin, deleteUser);
 
 router.get('/user/:id', isAuthenticated, isAdmin, getUserTasks);
 
-// router.get('/getAllData', isAuthenticated, isAdmin, getAllData);
-
 router.get('/getAllUsers', isAuthenticated, isAdmin, getAllUsers);
 
 router.get('/getAllTasks/:id', isAuthenticated, isAdmin, getAllTasks);
