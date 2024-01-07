@@ -100,7 +100,6 @@ const Home = () => {
             setDescription('')
             setRefresh((prevVal) => !prevVal)
         } catch (error) {
-            toast.error(error.response.data.message)
             setTasks(todos)
             setLoading(false)
         }
