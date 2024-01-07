@@ -1,9 +1,14 @@
-import { User } from '../models/user.js';
+import { User } from '../models/user';
 import bcrypt from 'bcrypt';
-import { sendCookie } from '../utils/features.js';
-import ErrorHandler from '../middlewares/error.js';
+import { sendCookie } from '../utils/features';
+import ErrorHandler from '../middlewares/error';
+import { NextFunction, Request, Response } from 'express';
 
-export const login = async (req, res, next) => {
+export const login = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const { username, password } = req.body;
 
@@ -17,13 +22,17 @@ export const login = async (req, res, next) => {
 		if (!isMatch)
 			return next(new ErrorHandler('Invalid Username or Password', 400));
 
-        sendCookie(user, res, `Welcome back, ${user.name}`, 200);
+		sendCookie(user, res, `Welcome back, ${user.name}`, 200);
 	} catch (error) {
 		next(error);
 	}
 };
 
-export const register = async (req, res, next) => {
+export const register = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const { name, username, password } = req.body;
 
@@ -41,14 +50,14 @@ export const register = async (req, res, next) => {
 	}
 };
 
-export const getMyProfile = (req, res) => {
+export const getMyProfile = (req: Request, res: Response) => {
 	res.status(200).json({
 		success: true,
 		user: req.user,
 	});
 };
 
-export const logout = (req, res) => {
+export const logout = (req: Request, res: Response) => {
 	res
 		.status(200)
 		.cookie('token', '', {

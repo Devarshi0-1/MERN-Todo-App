@@ -47,7 +47,7 @@ const Dashboard = () => {
             controller.abort()
             effectRun.current = true
         }
-    }, [])
+    }, [isAuthenticated])
 
     const handleUserDelete = async (id) => {
         try {

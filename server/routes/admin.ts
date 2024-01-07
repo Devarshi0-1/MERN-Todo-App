@@ -1,11 +1,11 @@
 import express from 'express';
-import { isAuthenticated, isAdmin } from '../middlewares/auth.js';
+import { isAuthenticated, isAdmin } from '../middlewares/auth';
 import {
 	deleteUser,
 	getUserTasks,
 	getAllUsers,
 	getAllTasks,
-} from '../controllers/admin.js';
+} from '../controllers/admin';
 
 const router = express.Router();
 
