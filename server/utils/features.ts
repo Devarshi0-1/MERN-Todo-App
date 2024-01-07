@@ -1,6 +1,6 @@
-import { Response } from 'express';
-import { IUserModel } from '../models/user';
 import jwt from 'jsonwebtoken';
+import { Response } from 'express';
+import { IUserModel } from '../models/user.js';
 
 export const sendCookie = (
 	user: IUserModel,

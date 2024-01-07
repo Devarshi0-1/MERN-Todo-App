@@ -1,11 +1,11 @@
 import express from 'express';
-import userRouter from './routes/user';
-import taskRouter from './routes/task';
-import adminRouter from './routes/admin';
+import cors from 'cors';
 import { config } from 'dotenv';
 import cookieParser from 'cookie-parser';
-import { errorMiddleware } from './middlewares/error';
-import cors from 'cors';
+import userRouter from './routes/user.js';
+import taskRouter from './routes/task.js';
+import adminRouter from './routes/admin.js';
+import { errorMiddleware } from './middlewares/error.js';
 
 export const app = express();
 

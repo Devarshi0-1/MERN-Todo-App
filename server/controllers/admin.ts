@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { User } from '../models/user';
-import { Task } from '../models/task';
-import { isEmpty } from '../utils/features';
-import ErrorHandler from '../middlewares/error';
+import { User } from '../models/user.js';
+import { Task } from '../models/task.js';
+import { isEmpty } from '../utils/features.js';
+import ErrorHandler from '../middlewares/error.js';
 
 export const deleteUser = async (
 	req: Request,

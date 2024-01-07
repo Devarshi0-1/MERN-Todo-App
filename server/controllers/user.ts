@@ -1,8 +1,8 @@
-import { User } from '../models/user';
 import bcrypt from 'bcrypt';
-import { sendCookie } from '../utils/features';
-import ErrorHandler from '../middlewares/error';
 import { NextFunction, Request, Response } from 'express';
+import { User } from '../models/user.js';
+import { sendCookie } from '../utils/features.js';
+import ErrorHandler from '../middlewares/error.js';
 
 export const login = async (
 	req: Request,

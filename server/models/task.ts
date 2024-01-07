@@ -1,4 +1,4 @@
-import {Schema, Model, model} from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 interface ITask {
 	user: Schema.Types.ObjectId;
@@ -32,6 +32,6 @@ const schema = new Schema<ITask>({
 	},
 });
 
-export interface ITaskModel extends Model<ITask> {}
+export interface ITaskModel extends ITask, Document {}
 
-export const Task: ITaskModel = model<ITask>('Task', schema);
+export const Task = model<ITaskModel>('Task', schema);

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import ErrorHandler from '../middlewares/error';
-import { Task } from '../models/task';
+import ErrorHandler from '../middlewares/error.js';
+import { Task } from '../models/task.js';
 
 export const newTask = async (
 	req: Request,
