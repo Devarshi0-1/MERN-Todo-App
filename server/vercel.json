@@ -1,6 +1,15 @@
 {
 	"version": 2,
-	"name": "mern-todo",
-	"builds": [{ "src": "dist/server.js", "use": "@vercel/node" }],
-	"routes": [{ "src": "/(.*)", "dest": "dist/server.js" }]
+	"builds": [
+		{
+			"src": "/server.ts",
+			"use": "@vercel/node"
+		}
+	],
+	"routes": [
+		{
+			"src": "/(.*)",
+			"dest": "/server.ts"
+		}
+	]
 }
