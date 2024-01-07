@@ -1,9 +1,14 @@
-import { User } from '../models/user.js';
-import { Task } from '../models/task.js';
-import { isEmpty } from '../utils/features.js';
-import ErrorHandler from '../middlewares/error.js';
+import { NextFunction, Request, Response } from 'express';
+import { User } from '../models/user';
+import { Task } from '../models/task';
+import { isEmpty } from '../utils/features';
+import ErrorHandler from '../middlewares/error';
 
-export const deleteUser = async (req, res, next) => {
+export const deleteUser = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const { id } = req.params;
 
@@ -29,19 +34,23 @@ export const deleteUser = async (req, res, next) => {
 	}
 };
 
-export const getUserTasks = async (req, res, next) => {
+export const getUserTasks = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const { id } = req.params;
 
-		if (isEmpty(id)) return new ErrorHandler('No User Id Found!');
+		if (isEmpty(id)) return new ErrorHandler('No User Id Found!', 401);
 
 		const user = await User.findById(id);
 
+		if (!user) return new ErrorHandler('No User Found!', 404);
+
 		const tasks = await Task.find({ user: user._id });
 
-		if (!user) return new ErrorHandler('No User Found!');
-
-		if (!tasks) return new ErrorHandler('No Tasks Found for the User!');
+		if (!tasks) return new ErrorHandler('No Tasks Found for the User!', 404);
 
 		res.json({
 			success: true,
@@ -52,15 +61,19 @@ export const getUserTasks = async (req, res, next) => {
 	}
 };
 
-export const getAllTasks = async (req, res, next) => {
+export const getAllTasks = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const { id } = req.params;
 
-		if (isEmpty(id)) return new ErrorHandler('No User Id Found!');
+		if (isEmpty(id)) return new ErrorHandler('No User Id Found!', 401);
 
 		const tasks = await Task.find({ user: id });
 
-		if (!tasks) return new ErrorHandler('No Tasks Found for the User!');
+		if (!tasks) return new ErrorHandler('No Tasks Found for the User!', 404);
 
 		return res.status(200).json({
 			success: true,
@@ -72,9 +85,15 @@ export const getAllTasks = async (req, res, next) => {
 	}
 };
 
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const users = await User.find({});
+
+		if (!users) return new ErrorHandler('Users not found!', 500);
 
 		return res.status(200).json({
 			success: true,

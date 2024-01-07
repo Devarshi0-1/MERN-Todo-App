@@ -1,7 +1,12 @@
-import ErrorHandler from '../middlewares/error.js';
-import { Task } from '../models/task.js';
+import { NextFunction, Request, Response } from 'express';
+import ErrorHandler from '../middlewares/error';
+import { Task } from '../models/task';
 
-export const newTask = async (req, res, next) => {
+export const newTask = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const { title, description } = req.body;
 
@@ -20,7 +25,11 @@ export const newTask = async (req, res, next) => {
 	}
 };
 
-export const getMyTask = async (req, res, next) => {
+export const getMyTask = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const userId = req.user._id;
 
@@ -35,7 +44,11 @@ export const getMyTask = async (req, res, next) => {
 	}
 };
 
-export const updateTask = async (req, res, next) => {
+export const updateTask = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const task = await Task.findById(req.params.id);
 
@@ -53,7 +66,11 @@ export const updateTask = async (req, res, next) => {
 	}
 };
 
-export const deleteTask = async (req, res, next) => {
+export const deleteTask = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	try {
 		const task = await Task.findById(req.params.id);
 

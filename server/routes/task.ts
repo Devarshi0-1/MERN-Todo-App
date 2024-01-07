@@ -4,8 +4,8 @@ import {
 	getMyTask,
 	newTask,
 	updateTask,
-} from '../controllers/task.js';
-import { isAuthenticated } from '../middlewares/auth.js';
+} from '../controllers/task';
+import { isAuthenticated } from '../middlewares/auth';
 
 const router = express.Router();
 
