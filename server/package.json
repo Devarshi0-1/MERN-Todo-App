@@ -2,15 +2,15 @@
 	"name": "mern-todo",
 	"version": "1.0.0",
 	"description": "",
-	"type": "module",
+    "type": "module",
 	"engines": {
 		"node": ">=14.20.1"
 	},
 	"main": "server.ts",
 	"scripts": {
 		"build": "tsc",
-		"start": "node dist/server.js",
-		"dev": "nodemon server.ts"
+		"start": "tsc && node dist/server.js",
+		"dev": "tsc && nodemon dist/server.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -32,7 +32,6 @@
 		"@types/jsonwebtoken": "^9.0.5",
 		"@types/node": "^20.10.6",
 		"nodemon": "^3.0.1",
-		"ts-node": "^10.9.2",
 		"typescript": "^5.3.3"
 	}
 }
