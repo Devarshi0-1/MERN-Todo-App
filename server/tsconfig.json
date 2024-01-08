@@ -1,25 +1,17 @@
 {
 	"compilerOptions": {
-		"target": "ES6",
-		"rootDir": "./",
-		"moduleResolution": "node10",
-		"typeRoots": ["api/custom_typings", "./node_modules/@types"],
-		"outDir": "dist",
+		"module": "commonjs",
 		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"skipDefaultLibCheck": true,
-		"skipLibCheck": true,
 		"allowSyntheticDefaultImports": true,
+		"target": "ES6",
 		"noImplicitAny": true,
+		"moduleResolution": "node",
 		"sourceMap": true,
-		"baseUrl": "."
+		"outDir": "dist",
+		"baseUrl": ".",
+		"paths": {
+			"*": ["node_modules/*", "src/types/*"]
+		}
 	},
-	"include": ["*/**/*", "api/custom_typings/express"],
-	"exclude": [
-		"node_modules",
-		"./node_modules",
-		"./node_modules/*",
-		"./node_modules/@types/node/index.d.ts"
-	]
+	"include": ["./src/**/*", "api/custom_typings/express"]
 }
