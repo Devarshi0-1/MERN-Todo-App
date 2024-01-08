@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es2016",
+		"target": "ES6",
 		"rootDir": "./",
 		"moduleResolution": "node10",
 		"typeRoots": ["./custom_typings", "./node_modules/@types"],

@@ -2,16 +2,23 @@
 	"name": "mern-todo",
 	"version": "1.0.0",
 	"description": "",
-    "type": "module",
+	"type": "module",
 	"engines": {
 		"node": ">=14.20.1"
 	},
 	"main": "server.ts",
 	"scripts": {
-		"build": "tsc",
-		"start": "tsc && node dist/server.js",
+		"build": "rimraf dist && tsc",
+		"ts.check": "tsc --project tsconfig.json",
+		"add-build": "git add dist",
+		"start": "nodemon ./server.ts",
 		"dev": "tsc && nodemon dist/server.js"
 	},
+	"pre-commit": [
+		"ts.check",
+		"build",
+		"add-build"
+	],
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
@@ -32,6 +39,8 @@
 		"@types/jsonwebtoken": "^9.0.5",
 		"@types/node": "^20.10.6",
 		"nodemon": "^3.0.1",
+		"pre-commit": "^1.2.2",
+		"rimraf": "^5.0.5",
 		"typescript": "^5.3.3"
 	}
 }
