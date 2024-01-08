@@ -53,6 +53,7 @@ export const updateTask = async (req, res, next) => {
 	}
 };
 
+
 export const deleteTask = async (req, res, next) => {
 	try {
 		const task = await Task.findById(req.params.id);
