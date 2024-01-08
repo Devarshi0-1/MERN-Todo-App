@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { User } from '../models/user.js';
+import { httpCode } from '../utils/features.js';
 
 export const isAuthenticated = async (req, res, next) => {
 	const { token } = req.cookies;
 
 	if (!token)
-		return res.status(404).json({
+		return res.status(httpCode.resourceNotFound).json({
 			success: false,
 			message: 'Login First',
 		});
@@ -20,8 +21,8 @@ export const isAuthenticated = async (req, res, next) => {
 export const isAdmin = (req, res, next) => {
 	if (req.user.role === 'admin') next();
 	else
-		return res.status(401).json({
+		return res.status(httpCode.notAuthorized).json({
 			success: false,
-			message: 'Access Denied',
+			message: 'Access Denied!',
 		});
 };

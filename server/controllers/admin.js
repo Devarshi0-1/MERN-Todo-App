@@ -1,26 +1,30 @@
 import { User } from '../models/user.js';
 import { Task } from '../models/task.js';
-import { isEmpty } from '../utils/features.js';
+import { isEmpty, httpCode } from '../utils/features.js';
 import ErrorHandler from '../middlewares/error.js';
 
 export const deleteUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 
-		if (isEmpty(id)) return next(new ErrorHandler('User Not Present', 400));
+		if (isEmpty(id))
+			return next(new ErrorHandler('User Not Present!', httpCode.badRequest));
 
 		const user = await User.findById(id);
 
-		if (!user) return next(new ErrorHandler('User not found', 404));
+		if (!user)
+			return next(
+				new ErrorHandler('User not found!', httpCode.resourceNotFound)
+			);
 
 		if (user.role === 'admin')
-			return next(new ErrorHandler('Not Authorized', 401));
+			return next(new ErrorHandler('Not Authorized!', httpCode.notAuthorized));
 
 		await Task.deleteMany({ user: user._id });
 
 		await user.deleteOne();
 
-		res.status(200).json({
+		res.status(httpCode.successful).json({
 			success: true,
 			message: 'User Deleted!',
 		});
@@ -33,15 +37,21 @@ export const getUserTasks = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 
-		if (isEmpty(id)) return new ErrorHandler('No User Id Found!', 401);
+		if (isEmpty(id))
+			return new ErrorHandler('No User Id Found!', httpCode.badRequest);
 
 		const user = await User.findById(id);
 
-		if (!user) return new ErrorHandler('No User Found!', 404);
+		if (!user)
+			return new ErrorHandler('No User Found!', httpCode.resourceNotFound);
 
 		const tasks = await Task.find({ user: user._id });
 
-		if (!tasks) return new ErrorHandler('No Tasks Found for the User!', 404);
+		if (!tasks)
+			return new ErrorHandler(
+				'No Tasks Found for the User!',
+				httpCode.resourceNotFound
+			);
 
 		res.json({
 			success: true,
@@ -56,13 +66,18 @@ export const getAllTasks = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 
-		if (isEmpty(id)) return new ErrorHandler('No User Id Found!', 401);
+		if (isEmpty(id))
+			return new ErrorHandler('No User Id Found!', httpCode.badRequest);
 
 		const tasks = await Task.find({ user: id });
 
-		if (!tasks) return new ErrorHandler('No Tasks Found for the User!', 404);
+		if (!tasks)
+			return new ErrorHandler(
+				'No Tasks Found for the User!',
+				httpCode.resourceNotFound
+			);
 
-		return res.status(200).json({
+		return res.status(httpCode.successful).json({
 			success: true,
 			message: 'All Tasks Fetched',
 			tasks,
@@ -76,9 +91,10 @@ export const getAllUsers = async (req, res, next) => {
 	try {
 		const users = await User.find({});
 
-		if (!users) return new ErrorHandler('Users not found!', 500);
+		if (!users)
+			return new ErrorHandler('Users not found!', httpCode.resourceNotFound);
 
-		return res.status(200).json({
+		return res.status(httpCode.successful).json({
 			success: true,
 			message: 'All Users Fetched',
 			users,

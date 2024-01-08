@@ -1,11 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const sendCookie = (
-	user,
-	res,
-	message,
-	statusCode = 200
-) => {
+export const sendCookie = (user, res, message, statusCode = 200) => {
 	const maxAge = 15 * 24 * 60 * 60 * 1000;
 
 	const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
@@ -40,4 +35,13 @@ export const isEmpty = (...strings) => {
 const isHavingOnlyWhiteSpaces = (elem) => {
 	if (elem.replace(/\s/g, '').length) return false;
 	return true;
+};
+
+export const httpCode = {
+	successful: 200,
+    resourceCreated: 201,
+    badRequest: 400,
+	notAuthorized: 401,
+	resourceNotFound: 404,
+	internalServerError: 500,
 };
