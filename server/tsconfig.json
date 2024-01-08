@@ -3,8 +3,8 @@
 		"target": "ES6",
 		"rootDir": "./",
 		"moduleResolution": "node10",
-		"typeRoots": ["./custom_typings", "./node_modules/@types"],
-		"outDir": "./dist",
+		"typeRoots": ["api/custom_typings", "./node_modules/@types"],
+		"outDir": "dist",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
@@ -15,7 +15,7 @@
 		"sourceMap": true,
 		"baseUrl": "."
 	},
-	"include": ["*/**/*"],
+	"include": ["*/**/*", "api/custom_typings/express"],
 	"exclude": [
 		"node_modules",
 		"./node_modules",

@@ -6,13 +6,13 @@
 	"engines": {
 		"node": ">=14.20.1"
 	},
-	"main": "server.ts",
+	"main": "dist/server.js",
 	"scripts": {
 		"build": "rimraf dist && tsc",
 		"ts.check": "tsc --project tsconfig.json",
 		"add-build": "git add dist",
-		"start": "nodemon ./server.ts",
-		"dev": "tsc && nodemon dist/server.js"
+		"start": "nodemon src/server.ts",
+		"dev": "nodemon src/server.ts"
 	},
 	"pre-commit": [
 		"ts.check",
