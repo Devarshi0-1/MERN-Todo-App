@@ -1,4 +1,4 @@
-import { httpCode } from '../utils/features';
+import { httpCode } from '../utils/features.js';
 
 class ErrorHandler extends Error {
 	constructor(message, statusCode) {
