@@ -6,19 +6,11 @@
 	"engines": {
 		"node": ">=14.20.1"
 	},
-	"main": "dist/server.js",
+	"main": "server.js",
 	"scripts": {
-		"build": "rimraf dist && tsc",
-		"ts.check": "tsc --project tsconfig.json",
-		"add-build": "git add dist",
-		"start": "node dist/src/server.js",
-		"dev": "nodemon src/server.ts"
+		"start": "node server.js",
+		"dev": "nodemon server.js"
 	},
-	"pre-commit": [
-		"ts.check",
-		"build",
-		"add-build"
-	],
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
@@ -32,15 +24,6 @@
 		"mongoose": "^7.4.3"
 	},
 	"devDependencies": {
-		"@types/bcrypt": "^5.0.2",
-		"@types/cookie-parser": "^1.4.6",
-		"@types/cors": "^2.8.17",
-		"@types/express": "^4.17.21",
-		"@types/jsonwebtoken": "^9.0.5",
-		"@types/node": "^20.10.6",
-		"nodemon": "^3.0.1",
-		"pre-commit": "^1.2.2",
-		"rimraf": "^5.0.5",
-		"typescript": "^5.3.3"
+		"nodemon": "^3.0.1"
 	}
 }
