@@ -10,7 +10,12 @@
 		"strict": true,
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true,
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": true,
+		"sourceMap": true,
+		"baseUrl": "."
 	},
+	"include": ["*/**/*"],
 	"exclude": [
 		"node_modules",
 		"./node_modules",
