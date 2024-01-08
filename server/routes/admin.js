@@ -1,5 +1,5 @@
 import express from 'express';
-import { isAuthenticated, isAdmin } from '../middlewares/auth.js/index.js';
+import { isAuthenticated, isAdmin } from '../middlewares/auth.js';
 import {
 	deleteUser,
 	getUserTasks,

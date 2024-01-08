@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { IUserModel } from '../models/user.js';
 
 export const sendCookie = (
 	user,
