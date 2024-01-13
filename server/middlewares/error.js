@@ -1,6 +1,7 @@
 import { httpCode } from '../utils/features.js';
 
 class ErrorHandler extends Error {
+	statusCode;
 	constructor(message, statusCode) {
 		super(message);
 		this.statusCode = statusCode;

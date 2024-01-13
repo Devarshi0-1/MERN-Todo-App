@@ -1,20 +1,15 @@
-import express from 'express';
-import { isAuthenticated, isAdmin } from '../middlewares/auth.js';
-import {
-	deleteUser,
-	getUserTasks,
-	getAllUsers,
-	getAllTasks,
-} from '../controllers/admin.js';
+import express from 'express'
+import { isAuthenticated, checkRole } from '../middlewares/auth.js'
+import { deleteUser, getUserTasks, getAllUsers, getAllTasks } from '../controllers/admin.js'
 
-const router = express.Router();
+const router = express.Router()
 
-router.delete('/delete/:id', isAuthenticated, isAdmin, deleteUser);
+router.delete('/delete/:id', isAuthenticated, checkRole('admin'), deleteUser)
 
-router.get('/user/:id', isAuthenticated, isAdmin, getUserTasks);
+router.get('/user/:id', isAuthenticated, checkRole('admin', 'testAdmin'), getUserTasks)
 
-router.get('/getAllUsers', isAuthenticated, isAdmin, getAllUsers);
+router.get('/getAllUsers', isAuthenticated, checkRole('admin', 'testAdmin'), getAllUsers)
 
-router.get('/getAllTasks/:id', isAuthenticated, isAdmin, getAllTasks);
+router.get('/getAllTasks/:id', isAuthenticated, checkRole('admin', 'testAdmin'), getAllTasks)
 
-export default router;
+export default router

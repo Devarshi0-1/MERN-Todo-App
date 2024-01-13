@@ -65,7 +65,8 @@ export const deleteTask = async (req, res, next) => {
 		if (!task)
 			return next(
 				new ErrorHandler('Task not found', httpCode.resourceNotFound)
-			);
+            );
+        
 		await task.deleteOne();
 
 		res.status(httpCode.successful).json({
