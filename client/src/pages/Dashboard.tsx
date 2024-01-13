@@ -1,11 +1,11 @@
-import { FC, useEffect, useRef, useState } from 'react'
-import { useStore } from '../utils/store'
 import axios from 'axios'
-import { NavigateFunction, useNavigate } from 'react-router-dom'
+import { FC, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { NavigateFunction, useNavigate } from 'react-router-dom'
 import AdminUserInfo from '../components/AdminUserInfo'
 import Loader from '../components/Loader'
 import { server } from '../main'
+import { useStore } from '../utils/store'
 import { useFetchGet } from '../utils/useFetch'
 
 const Dashboard: FC = () => {

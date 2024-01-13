@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { server } from '../main'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { Navigate } from 'react-router-dom'
 import TodoItem from '../components/TodoItem'
+import { server } from '../main'
+import { isValid } from '../utils/helper'
 import { useStore } from '../utils/store'
 import { useFetchGet } from '../utils/useFetch'
-import { isValid } from '../utils/helper'
 
 const Home = () => {
     const { user, setUser, setIsAuthenticated, isAuthenticated } = useStore()

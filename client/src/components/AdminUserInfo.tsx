@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { IoIosArrowDropdownCircle } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { server } from '../main.jsx';
 import { f } from '../utils/helper';
-import { useFetchGet } from '../utils/useFetch.jsx';
 import { useStore } from '../utils/store';
+import { useFetchGet } from '../utils/useFetch.jsx';
 import AdminTodo from './AdminTodo.js';
 
 type TProp = {
@@ -84,7 +84,7 @@ const AdminUserInfo = ({ user, handleUserDelete }: TProp) => {
 					<MdDelete
 						className={`${
 							user?.role === 'admin' || loggedInUser?.role === 'testAdmin'
-								? 'opacity-30 cursor-not-allowed'
+								? 'opacity-30 cursor-not-allowed select-none'
 								: null
 						} fill-red-400`}
 						onClick={() => handleUserDelete(user?._id!)}

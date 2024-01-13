@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import axios from 'axios'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { Link, Navigate } from 'react-router-dom'
 import { server } from '../main'
-import toast from 'react-hot-toast'
 import { useStore } from '../utils/store'
 
 const Register = () => {

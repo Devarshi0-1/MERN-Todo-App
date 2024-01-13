@@ -1,9 +1,9 @@
-import { FC } from 'react';
 import axios from 'axios';
+import { FC } from 'react';
+import { toast } from 'react-hot-toast';
+import { FiHome, FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { server } from '../main';
-import { toast } from 'react-hot-toast';
-import { FiLogOut, FiHome } from 'react-icons/fi';
 import { useStore } from '../utils/store';
 
 const Navbar: FC = () => {

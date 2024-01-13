@@ -1,5 +1,5 @@
-import { MdDelete } from 'react-icons/md'
 import { ReactElement } from 'react'
+import { MdDelete } from 'react-icons/md'
 
 type TProp = {
     id: string

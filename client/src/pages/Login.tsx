@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link, Navigate } from 'react-router-dom';
 import { server } from '../main';
-import { toast } from 'react-hot-toast';
 import { useStore } from '../utils/store';
 
 type THandleLogin = ({
@@ -110,8 +110,9 @@ const Login = () => {
 				</form>
 			</div>
 			<div className='text-center'>
-				<button
+				<button 
 					className='bg-white rounded-lg p-4 text-lg w-1/5 mt-5'
+                    type='button'
 					onClick={handleTestAdminLogin}>
 					Login As Test Admin
 				</button>
