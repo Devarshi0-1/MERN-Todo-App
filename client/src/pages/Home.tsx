@@ -6,18 +6,18 @@ import { Navigate } from 'react-router-dom'
 import TodoItem from '../components/TodoItem'
 import { useStore } from '../utils/store'
 import { useFetchGet } from '../utils/useFetch'
-import isValid from '../utils/isValidInput'
+import { isValid } from '../utils/helper'
 
 const Home = () => {
-    const { setUser, setIsAuthenticated, isAuthenticated } = useStore()
+    const { user, setUser, setIsAuthenticated, isAuthenticated } = useStore()
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [tasks, setTasks] = useState([])
-    const [refresh, setRefresh] = useState(false)
+    const [title, setTitle] = useState<string>('')
+    const [description, setDescription] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
+    const [tasks, setTasks] = useState<TTask[]>([])
+    const [refresh, setRefresh] = useState<boolean>(false)
 
-    const { error, data: tasksData } = useFetchGet('/task/my', refresh)
+    const { error, data: tasksData }: TFetchGetTasks = useFetchGet('/task/my', refresh)
 
     useEffect(() => {
         setTasks(tasksData.tasks)
@@ -25,63 +25,69 @@ const Home = () => {
 
     if (error.error) toast.error(error.message)
 
-    const handleUpdate = async (id) => {
-        const todos = tasks
+    const handleUpdate = async (id: string) => {
         setTasks((prev) => {
             return prev.map((task) =>
                 task._id === id ? { ...task, isCompleted: !task.isCompleted } : task,
             )
         })
         try {
-            const { data } = await axios.put(`${server}/task/${id}`, {}, { withCredentials: true })
+            const { data } = await axios.put<TBasicRes>(
+                `${server}/task/${id}`,
+                {},
+                { withCredentials: true },
+            )
             toast.success(data.message)
 
             setRefresh((prevVal) => !prevVal)
         } catch (error) {
-            setTasks(todos)
-            toast.error(error.response.data.message)
+            setTasks(tasks)
+            const err = error as IAxiosErrorResponse
+            toast.error(err.response.data.message)
         }
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: string) => {
         setTasks((prev) => {
             return prev.filter((task) => task._id !== id)
         })
         try {
-            const { data } = await axios.delete(`${server}/task/${id}`, {
+            const { data } = await axios.delete<TBasicRes>(`${server}/task/${id}`, {
                 withCredentials: true,
             })
             toast.success(data.message)
             setRefresh((prevVal) => !prevVal)
         } catch (error) {
             setTasks(tasks)
-            toast.error(error.response.data.message)
+            const err = error as IAxiosErrorResponse
+            toast.error(err.response.data.message)
         }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(isValid(title, description))
         if (!isValid(title, description)) {
             return toast.error('Title Or Description cannot be Empty or Contain only a Whitespace')
         }
 
-        const todos = tasks
         setLoading(true)
-        setTasks((prev) => [
-            ...prev,
+
+        const optimisticTasks: TTask[] = [
+            ...tasks,
             {
-                _id: prev.length + 1,
+                user,
+                _id: String(Math.random() + 1),
                 title,
                 description,
                 isCompleted: false,
-                handleUpdate: () => {},
-                handleDelete: () => {},
+                createdAt: new Date(Date.now()),
             },
-        ])
+        ]
+
+        setTasks(optimisticTasks)
 
         try {
-            const { data } = await axios.post(
+            const { data } = await axios.post<TBasicRes>(
                 `${server}/task/new`,
                 {
                     title,
@@ -100,7 +106,7 @@ const Home = () => {
             setDescription('')
             setRefresh((prevVal) => !prevVal)
         } catch (error) {
-            setTasks(todos)
+            setTasks(tasks)
             setLoading(false)
         }
     }
@@ -108,7 +114,7 @@ const Home = () => {
     useEffect(() => {
         setLoading(true)
         axios
-            .get(`${server}/users/me`, {
+            .get<TFetchGetUser>(`${server}/users/me`, {
                 withCredentials: true,
             })
             .then((res) => {
@@ -116,8 +122,8 @@ const Home = () => {
                 setIsAuthenticated(true)
                 setLoading(false)
             })
-            .catch((err) => {
-                setUser({})
+            .catch(() => {
+                setUser(null)
                 setIsAuthenticated(false)
                 setLoading(false)
             })
@@ -127,7 +133,7 @@ const Home = () => {
 
     return (
         <>
-            <div className='m-auto mt-24 w-2/4 rounded-3xl bg-gradient-to-br from-[rgb(255,255,255,0.2)] to-transparent p-6'>
+            <div className='m-auto mt-24 w-2/4 rounded-lg bg-gradient-to-br from-[rgb(255,255,255,0.2)] to-transparent p-6'>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-4 bg-transparent'>
                     <input
                         type='text'
@@ -138,7 +144,7 @@ const Home = () => {
                         id='title'
                         autoComplete='on'
                         required
-                        className='rounded-3xl border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
+                        className='rounded-lg border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
                     />
                     <input
                         type='text'
@@ -149,13 +155,13 @@ const Home = () => {
                         id='description'
                         autoComplete='on'
                         required
-                        className='rounded-3xl border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
+                        className='rounded-lg border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
                     />
 
                     <button
                         type='submit'
                         disabled={loading}
-                        className='m-auto w-fit rounded-xl border-2 bg-white px-3 py-2 text-xl text-black'>
+                        className='m-auto w-fit rounded-lg border-2 bg-white px-3 py-2 text-xl text-black'>
                         Add Task
                     </button>
                 </form>

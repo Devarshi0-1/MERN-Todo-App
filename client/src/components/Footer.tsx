@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import { FiLink2 } from 'react-icons/fi'
 
-const Footer = () => {
+const Footer: FC = () => {
     return (
         <div className='absolute bottom-5 left-5 text-blue-200'>
             <a

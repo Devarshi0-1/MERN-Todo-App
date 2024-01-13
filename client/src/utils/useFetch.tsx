@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { server } from '../main'
 
-export const useFetchGet = (endpoint, refresh = true) => {
-    const [loading, setLoading] = useState(false)
-    const [data, setData] = useState([])
-    const [error, setError] = useState({
+export const useFetchGet = (endpoint: string, refresh: boolean = true) => {
+    const [loading, setLoading] = useState<boolean>(false)
+    const [data, setData] = useState<any>([])
+    const [error, setError] = useState<TBasicRes>({
         error: false,
         message: '',
     })

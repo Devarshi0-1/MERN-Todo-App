@@ -2,22 +2,24 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Link, Navigate } from 'react-router-dom'
 import { server } from '../main'
-import { toast } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useStore } from '../utils/store'
 
-const Login = () => {
+const Register = () => {
+    const [name, setName] = useState<string>('')
+    const [username, setUsername] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+
     const { isAuthenticated, setIsAuthenticated, loading, setLoading } = useStore()
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setLoading(true)
         try {
-            const { data } = await axios.post(
-                `${server}/users/login`,
+            const { data } = await axios.post<TBasicRes>(
+                `${server}/users/new`,
                 {
+                    name,
                     username,
                     password,
                 },
@@ -33,7 +35,8 @@ const Login = () => {
             setIsAuthenticated(true)
             setLoading(false)
         } catch (error) {
-            toast.error(error.response.data.message)
+            const err = error as IAxiosErrorResponse
+            toast.error(err.response.data.message)
             setIsAuthenticated(false)
             setLoading(false)
         }
@@ -44,6 +47,17 @@ const Login = () => {
     return (
         <div className='m-auto mt-24 w-2/4 rounded-3xl bg-gradient-to-br from-[rgb(255,255,255,0.2)] to-transparent p-6'>
             <form onSubmit={handleSubmit} className='flex flex-col gap-6 bg-transparent'>
+                <input
+                    type='text'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder='Name'
+                    name='name'
+                    id='name'
+                    autoComplete='on'
+                    required
+                    className='rounded-3xl border-[1px] border-[rgb(255,255,255,0.2)] bg-transparent p-3 text-2xl text-white outline-none'
+                />
                 <input
                     type='text'
                     value={username}
@@ -68,20 +82,19 @@ const Login = () => {
                 />
                 <div className='flex items-center justify-between px-4'>
                     <Link
-                        to='/register'
+                        to='/login'
                         className='text-center text-white transition-opacity hover:opacity-70'>
-                        Create an Account
+                        Already having an account?
                     </Link>
                     <button
                         type='submit'
                         disabled={loading}
                         className='w-fit rounded-xl border-[1px] bg-transparent bg-white px-3 py-2 text-xl text-black transition-opacity hover:opacity-70'>
-                        Login
+                        Sign Up
                     </button>
                 </div>
             </form>
         </div>
     )
 }
-
-export default Login
+export default Register
