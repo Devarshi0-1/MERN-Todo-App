@@ -1,6 +1,7 @@
 import express from 'express'
-import { isAuthenticated, checkRole } from '../middlewares/auth.js'
-import { deleteUser, getUserTasks, getAllUsers, getAllTasks } from '../controllers/admin.js'
+import { deleteUser, getAllTasks, getAllUsers, getUserTasks } from '../controllers/admin.js'
+import { checkRole } from '../middlewares/auth.js'
+import { isAuthenticated } from '../middlewares/auth.js'
 
 const router = express.Router()
 

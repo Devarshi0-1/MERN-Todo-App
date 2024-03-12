@@ -1,12 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 export const connectDB = () => {
-	mongoose
-		.connect(process.env.MONGO_URI, {
-			dbName: 'todoApp',
-		})
-		.then((c) => console.log(`Database Connected With ${c.connection.host}`))
-		.catch((err) =>
-			console.log('Failed to connect to Database with error\n ' + err.message)
-		);
-};
+    mongoose
+        .connect(process.env.MONGO_URI, {
+            dbName: 'todoApp',
+        })
+        .then((c) => console.log(`Database Connected With ${c.connection.host}`))
+        .catch((err) => console.log('Failed to connect to Database with error\n ' + err.message))
+}
