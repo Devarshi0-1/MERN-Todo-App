@@ -33,13 +33,15 @@ const AdminTodo = ({
                     checked={isCompleted}
                     onChange={() => handleTodoUpdate(id)}
                     className={`${
-                        loggedInUser?.role === 'testAdmin' ? 'opacity-30 cursor-not-allowed' : null
+                        loggedInUser?.role === 'testAdmin'
+                            ? 'opacity-30 cursor-not-allowed select-none pointer-events-none'
+                            : null
                     } m-1 aspect-square scale-[2]`}
                 />
                 <button
                     className={`${
                         loggedInUser?.role === 'testAdmin'
-                            ? 'opacity-30 cursor-not-allowed select-none'
+                            ? 'opacity-30 cursor-not-allowed select-none pointer-events-none'
                             : null
                     } rounded-md border-2 bg-white border-black px-2 text-black`}
                     onClick={() => handleDelete(id)}>
