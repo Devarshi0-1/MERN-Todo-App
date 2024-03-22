@@ -11,7 +11,7 @@ router.get('/my', isAuthenticated, getMyTask)
 
 router
     .route('/:id')
-    .put(isAuthenticated, checkRole('user', 'admin', 'testAdmin'), updateTask)
-    .delete(isAuthenticated, checkRole('user', 'admin', 'testAdmin'), deleteTask)
+    .put(isAuthenticated, checkRole('visitor', 'admin', 'testAdmin'), updateTask)
+    .delete(isAuthenticated, checkRole('visitor', 'admin', 'testAdmin'), deleteTask)
 
 export default router
